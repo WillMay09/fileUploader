@@ -1,13 +1,9 @@
 const express = require("express");
-
+const indexController = require("../controllers/indexController");
 const router = express.Router();
 
 
-router.get('/', (req, res)=>{
-
-    res.send("NOT YET IMPLEMENTED");
-
-});
+router.get('/', indexController.getPublicCollection);
 
 
 module.exports = router;

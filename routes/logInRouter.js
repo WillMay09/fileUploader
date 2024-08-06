@@ -1,11 +1,9 @@
 const express = require("express");
-
+const logInController = require("../controllers/logInController");
 const router = express.Router();
 
-router.get("/", (req, res) =>{
 
-    res.send("NOT YET IMPLEMENTED");
-})
+router.get("/", logInController.getLoginPage);
 
 
 

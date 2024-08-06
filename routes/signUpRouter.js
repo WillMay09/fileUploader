@@ -1,12 +1,9 @@
 const express = require('express');
+const signUpController = require("../controllers/signUpController")
 const router = express.Router();
 
 
-router.get('/', (req,res)=>{
-
-    res.send("NOT YET IMPLEMENTED");
-
-})
+router.get('/',signUpController.getSignUpForm );
 
 
 module.exports = router;
