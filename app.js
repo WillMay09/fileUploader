@@ -7,6 +7,14 @@ const indexRouter = require("./routes/indexRouter");
 const logInRouter = require("./routes/logInRouter");
 const signUpRouter = require("./routes/signUpRouter");
 
+
+
+//template engine
+app.set('views',path.join(__dirname,'views'));
+app.set("view engine", 'ejs');
+app.use(express.urlencoded({extended: true}));
+
+
 //Routes
 app.use('/', indexRouter);
 app.use('/login', logInRouter);
