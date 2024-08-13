@@ -3,7 +3,7 @@ const path = require("path");
 const { Pool } = require("pg");
 const app = express();
 const PORT = process.env.PORT || 3000;
-require('dotenv').config
+require('dotenv').config();
 const indexRouter = require("./routes/indexRouter");
 const logInRouter = require("./routes/logInRouter");
 const signUpRouter = require("./routes/signUpRouter");
@@ -17,19 +17,7 @@ app.use(express.urlencoded({extended: true}));
 
 
 //database connection
-const pool = new Pool({
 
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 2000,
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-
-
-});
 
 
 //Routes
