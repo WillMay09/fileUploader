@@ -1,5 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const {body, validationResult} = require("express-validator");
+//const prisma = require('../prisma/');
+
 exports.getSignUpForm = asyncHandler(async (req,res, next) =>{
 
     
