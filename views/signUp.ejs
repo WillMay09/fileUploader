@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <%-include("partials/errors.ejs")%>
     <h1>Sign Up</h1>
     <form action="/signUp" method ="POST">
         <div>
@@ -14,15 +15,15 @@
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email", id="email", name="email">
+            <input type="email", id="email", name="email" required>
         </div>
         <div>   
             <label for="password">Password</label>
-            <input type="password", id="password", name="password">
+            <input type="password", id="password", name="password" required>
         </div>
         <div>   
             <label for="date_of_birth">Date of Birth</label>
-            <input type="date", id="date_of_birth", name="date_of_birth">
+            <input type="date", id="date_of_birth", name="date_of_birth" required>
         </div>
         <button>Sign Up</button>
     </form>
