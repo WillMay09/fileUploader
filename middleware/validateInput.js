@@ -1,6 +1,7 @@
 const { body, validationResult } = require('express-validator');
 //body allows you to specify which fields in the request body should be validated
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const validateUserInput = [ 
     
     body('username')
@@ -8,7 +9,8 @@ const validateUserInput = [
         .isString()
         .withMessage('Username must be a String')
         .isLength({max:20})
-        .withMessage("Username can be a maximum of 20 characters"),
+        .withMessage("Username can be a maximum of 20 characters")
+        .escape(),
 
         body('password')
         .trim()
@@ -23,7 +25,23 @@ const validateUserInput = [
         body('email')
         .trim()
         .isString()
-        .withMessage("Email must be a String"),
+        .withMessage("Email must be a String")
+        .custom(async (email)=>{
+            
+            const existingUser = await prisma.users.findUnique({
+
+                where: { email: email},
+
+            });
+
+            if(existingUser){
+
+                throw new Error(`Email address ${email} is already in use`);
+
+            };
+
+            return true;
+        }),
 
         body('date_of_birth')
         .custom((value)=>{
@@ -47,7 +65,7 @@ const validateUserInput = [
         //if there are errors in the validation process
         if(!errors.isEmpty()){
 
-         return res.render('signUp.ejs', {errors: errors.array(), values: req.body})
+         return res.status(400).render('signUp.ejs', {errors: errors.array(), values: req.body})
         }
 
         next();
