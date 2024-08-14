@@ -1,4 +1,6 @@
 const {Pool} = require('pg');
+const session = require('express-session')
+const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config();
 const pool = new Pool({
 
@@ -14,4 +16,12 @@ const pool = new Pool({
 
 });
 
-module.exports =pool;
+const store = new pgSession({
+
+    pool: pool, //connection pool instance
+    tableName: 'sessions' // Name of the table where sessions will be stored
+});
+
+
+
+module.exports ={pool , store };

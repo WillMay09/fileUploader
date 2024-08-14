@@ -29,6 +29,12 @@ model users {
   collection    collection[]
 }
 
+model sessions {
+  sid String @id
+  sess Json
+  expire DateTime
+}
+
 
 
 
