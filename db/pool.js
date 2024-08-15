@@ -19,7 +19,8 @@ const pool = new Pool({
 const store = new pgSession({
 
     pool: pool, //connection pool instance
-    tableName: 'sessions' // Name of the table where sessions will be stored
+    createTableIfMissing: true,
+    // Name of the table where sessions will be stored
 });
 
 
