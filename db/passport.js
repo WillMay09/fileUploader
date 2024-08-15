@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const {pool} = require('./pool');
+const isValidPassword = require('./passwordUtil').validPassword;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -15,7 +16,7 @@ const verifyCallback = async function(username, password, done){
             return done(null, false, {message: 'Incorrect username. '});
         }
         //compare provided password with stored hashed password
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        const isValid = isValidPassword(password, user.hash, user.salt);
 
         if(!isValidPassword){
 
