@@ -1,7 +1,7 @@
 const express = require('express');
 const signUpController = require("../controllers/signUpController")
 const router = express.Router();
-const validate = require("../middleware/validateInput");
+const validate = require("../middleware/signUpValidate");
 
 
 router.get('/',signUpController.getSignUpForm );
