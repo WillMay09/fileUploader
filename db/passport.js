@@ -37,12 +37,13 @@ passport.use(strategy);
 //putting user into the session
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.userid);//stores user id in the session
 });
 
-passport.deserializeUser(async (id, done) => {
+//grabbing user object by using the userid
+passport.deserializeUser(async (userid, done) => {
     try {
-        const user = await prisma.users.findUnique({ where: { id } });
+        const user = await prisma.users.findUnique({ where: { userid } });
         done(null, user);
     } catch (err) {
         done(err);

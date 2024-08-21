@@ -10,7 +10,23 @@ const validateUserInput = [
         .withMessage('Username must be a String')
         .isLength({max:20})
         .withMessage("Username can be a maximum of 20 characters")
-        .escape(),
+        .escape()
+        .custom(async(username)=>{
+
+            const existingUsername = prisma.users.findUnique({
+
+                where: {username: username},
+            });
+
+            if(!existingUsername){
+
+                return new Error(`The username ${username} is already taken`);
+            }
+
+            return true;
+
+
+        }),
 
         body('password')
         .trim()

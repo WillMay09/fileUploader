@@ -57,7 +57,7 @@ app.use((req,res,next) => {
 
 //intialize passport and session
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());//we need this to access session info in db
 
 app.use(express.urlencoded({extended: true}));
 
